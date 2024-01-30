@@ -30,7 +30,10 @@
     "app/login/page.jsx",
     "app/dashboard/page.jsx",
     "app/page.jsx",
-    "app/layout.jsx"
+    "app/layout.jsx",
+    "app/dashboard/products/add/page.jsx",
+    "app/dashboard/users/add/page.jsx",
+    "app/dashboard/products/page.jsx"
   ],
   "exclude": ["node_modules"]
 }

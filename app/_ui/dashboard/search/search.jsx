@@ -13,8 +13,9 @@ const Search = ({ placeholder }) => {
 
   const handleSearch = useThrottledCallback((e) => {
     e.preventDefault();
-
     const params = new URLSearchParams(serachParams);
+
+    params.set("page", 1);
 
     if (e.target.value) {
       e.target.value.length > 2 && params.set("q", e.target.value);

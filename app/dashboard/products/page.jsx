@@ -1,24 +1,21 @@
-import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import { fetchUsers } from "../../lib/data";
+import { fetchProducts } from "@/app/lib/data";
+import Search from "@/app/_ui/dashboard/search/search";
+import Pagination from "@/app/_ui/dashboard/pagination/pagination";
+import styles from "@/app/_ui/dashboard/products/products.module.css";
 
-import Search from "../../_ui/dashboard/search/search";
-import styles from "../../_ui/dashboard/users/users.module.css";
-import Pagination from "../../_ui/dashboard/pagination/pagination";
-
-const UsersPage = async ({ searchParams }) => {
+const ProductPage = async ({ searchParams }) => {
   const q = searchParams?.q || "";
   const page = searchParams?.page || 1;
-
-  const { count, users } = await fetchUsers(q, page);
+  const { count, products } = await fetchProducts(q, page);
 
   return (
     <div className={styles.container}>
       <div className={styles.top}>
-        <Search placeholder="Search for user..." />
-        <Link href="/dashboard/users/add">
+        <Search placeholder="Search for products..." />
+        <Link href="/dashboard/products/add">
           <button className={styles.addButton}>Add New</button>
         </Link>
       </div>
@@ -26,38 +23,38 @@ const UsersPage = async ({ searchParams }) => {
       <table className={styles.table}>
         <thead>
           <tr>
-            <td>Name</td>
-            <td>Email</td>
+            <td>Title</td>
+            <td>Description</td>
+            <td>Price</td>
             <td>Created At</td>
-            <td>Role</td>
-            <td>Status</td>
+            <td>Stock</td>
             <td>Action</td>
           </tr>
         </thead>
 
         <tbody>
-          {users.map((user) => (
-            <tr key={user.id}>
+          {products.map((product) => (
+            <tr key={product.id}>
               <td>
-                <div className={styles.user}>
+                <div className={styles.product}>
                   <Image
-                    src={user.img || "/noavatar.png"}
-                    alt="avatar"
+                    src={product.img || "/noproduct.jpg"}
+                    alt="product"
                     width={40}
                     height={40}
-                    className={styles.userImage}
+                    className={styles.productImage}
                   />
-                  {user.username}
+                  {product.title}
                 </div>
               </td>
 
-              <td>{user.email}</td>
-              <td>{user.createdAt}</td>
-              <td>{user.isAdmin ? "Admin" : "Client"}</td>
-              <td>{user.isActive ? "Passive" : "Active"}</td>
+              <td>{product.desc}</td>
+              <td>{product.price}$</td>
+              <td>{product.createdAt?.toString().splice(4, 16)}</td>
+              <td>{product.stock}</td>
               <td>
                 <div className={styles.buttons}>
-                  <Link href={`/dashboard/users/${user.id}`}>
+                  <Link href={`/dashboard/products/${product.id}`}>
                     <button className={`${styles.button} ${styles.view}`}>
                       View
                     </button>
@@ -77,4 +74,4 @@ const UsersPage = async ({ searchParams }) => {
   );
 };
 
-export default UsersPage;
+export default ProductPage;

@@ -29,4 +29,4 @@ const productSchema = new moongose.Schema(
 
 export const User = moongose.models.User || moongose.model("User", userSchema);
 export const Product =
-  moongose.models.Product || moongose.model("Product", userSchema);
+  moongose.models.Product || moongose.model("Product", productSchema);
