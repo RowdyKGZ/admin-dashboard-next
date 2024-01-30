@@ -8,10 +8,11 @@ import Search from "../../_ui/dashboard/search/search";
 import styles from "../../_ui/dashboard/users/users.module.css";
 import Pagination from "../../_ui/dashboard/pagination/pagination";
 
-const UsersPage = async () => {
-  const users = await fetchUsers();
+const UsersPage = async ({ searchParams }) => {
+  const q = searchParams?.q || "";
 
-  console.log(users);
+  const users = await fetchUsers(q);
+
   return (
     <div className={styles.container}>
       <div className={styles.top}>
