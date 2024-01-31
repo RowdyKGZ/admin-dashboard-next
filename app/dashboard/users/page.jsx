@@ -14,6 +14,8 @@ const UsersPage = async ({ searchParams }) => {
 
   const { count, users } = await fetchUsers(q, page);
 
+  console.log(users);
+
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -37,7 +39,7 @@ const UsersPage = async ({ searchParams }) => {
 
         <tbody>
           {users.map((user) => (
-            <tr key={user.id}>
+            <tr key={user._id}>
               <td>
                 <div className={styles.user}>
                   <Image
@@ -52,7 +54,7 @@ const UsersPage = async ({ searchParams }) => {
               </td>
 
               <td>{user.email}</td>
-              <td>{user.createdAt}</td>
+              <td>{user.createdAt?.toString().slice(4, 16)}</td>
               <td>{user.isAdmin ? "Admin" : "Client"}</td>
               <td>{user.isActive ? "Passive" : "Active"}</td>
               <td>
