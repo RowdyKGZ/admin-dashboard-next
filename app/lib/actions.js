@@ -125,7 +125,6 @@ export const updateProduct = async (formData) => {
   const { id, title, desc, price, color, stock, size } =
     Object.fromEntries(formData);
 
-  console.log(id);
   try {
     connectDB();
 
@@ -142,8 +141,6 @@ export const updateProduct = async (formData) => {
       (key) =>
         (updateFields[key] === "" || undefined) && delete updateFields[key]
     );
-
-    console.log(updateFields);
 
     await Product.findByIdAndUpdate(id, updateFields);
   } catch (error) {

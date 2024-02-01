@@ -4,7 +4,6 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import styles from "./pagination.module.css";
 
 const Pagination = ({ count }) => {
-  console.log(count);
   const { replace } = useRouter();
   const serachParams = useSearchParams();
   const pathname = usePathname();
